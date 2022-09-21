@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.cognizant.commentcrud.controller.CommentControllerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-07-22T16:24:20" hostname="LTUS149728" time="0.613">
+  <properties/>
+  <testcase name="shouldReturnStatusOkWhenAccessingCommentsWhileUnauthorized()" classname="com.cognizant.commentcrud.controller.CommentControllerTest" time="0.163"/>
+  <testcase name="shouldReturnCreatedCommentOnPostRequest()" classname="com.cognizant.commentcrud.controller.CommentControllerTest" time="0.384"/>
+  <testcase name="shouldReturnPageOfCommentsAndStatusOkWhenGivenPostId()" classname="com.cognizant.commentcrud.controller.CommentControllerTest" time="0.061"/>
+  <system-out><![CDATA[2021-07-22 11:24:17.838  INFO 21516 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.cognizant.commentcrud.controller.CommentControllerTest], using SpringBootContextLoader
+2021-07-22 11:24:17.840  INFO 21516 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.cognizant.commentcrud.controller.CommentControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2021-07-22 11:24:17.841  INFO 21516 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.cognizant.commentcrud.controller.CommentControllerTest]: CommentControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2021-07-22 11:24:17.896  INFO 21516 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.cognizant.commentcrud.CommentCrudApplication for test class com.cognizant.commentcrud.controller.CommentControllerTest
+2021-07-22 11:24:17.898  INFO 21516 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2021-07-22 11:24:17.900  INFO 21516 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6c270724, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@447591bd, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@30564c9e, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7a676a87, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@2ead5cc8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@463dc8d9, org.springframework.test.context.transaction.TransactionalTestExecutionListener@440d5e3c, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@57f2768, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@41f06013, org.springframework.test.context.event.EventPublishingTestExecutionListener@69a313f4, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@47f15c42, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@3bc967b3, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@79fb7821, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@8b6f859, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@45e8a641, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@35eca5b0, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@1774f95c]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.4.5)
+
+2021-07-22 11:24:17.987  INFO 21516 --- [    Test worker] c.c.c.controller.CommentControllerTest   : Starting CommentControllerTest using Java 11.0.7 on LTUS149728 with PID 21516 (started by 950413 in C:\Users\950413\OneDrive - Cognizant\Desktop\Enablement\comment-crud)
+2021-07-22 11:24:17.988  INFO 21516 --- [    Test worker] c.c.c.controller.CommentControllerTest   : The following profiles are active: local
+2021-07-22 11:24:17.995  WARN 21516 --- [    Test worker] o.s.b.c.config.ConfigDataEnvironment     : Property 'spring.profiles' imported from location 'class path resource [application.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application.yml] - 20:13]
+2021-07-22 11:24:17.996  WARN 21516 --- [    Test worker] o.s.b.c.config.ConfigDataEnvironment     : Property 'spring.profiles' imported from location 'class path resource [application.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application.yml] - 15:13]
+2021-07-22 11:24:17.996  WARN 21516 --- [    Test worker] o.s.b.c.config.ConfigDataEnvironment     : Property 'spring.profiles' imported from location 'class path resource [application.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application.yml] - 9:13]
+2021-07-22 11:24:19.281  INFO 21516 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2dcc4861, org.springframework.security.web.context.SecurityContextPersistenceFilter@71b16980, org.springframework.security.web.header.HeaderWriterFilter@2e5dfb10, org.keycloak.adapters.springsecurity.filter.KeycloakPreAuthActionsFilter@4e2b2c61, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter@35d4f3e2, org.springframework.security.web.authentication.logout.LogoutFilter@46861862, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2864393, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@43c2ada8, org.keycloak.adapters.springsecurity.filter.KeycloakSecurityContextRequestFilter@393c9578, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticatedActionsFilter@3d4ecb5e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7873f933, org.springframework.security.web.session.SessionManagementFilter@9eeca49, org.springframework.security.web.access.ExceptionTranslationFilter@6582c8c5, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@23b0d9ef]
+2021-07-22 11:24:19.596  INFO 21516 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-22 11:24:20.003  INFO 21516 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-07-22 11:24:20.003  INFO 21516 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-07-22 11:24:20.005  INFO 21516 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2021-07-22 11:24:20.035  INFO 21516 --- [    Test worker] c.c.c.controller.CommentControllerTest   : Started CommentControllerTest in 2.129 seconds (JVM running for 27.099)
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /comments
+       Parameters = {}
+          Headers = []
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = com.cognizant.commentcrud.controller.CommentController
+           Method = com.cognizant.commentcrud.controller.CommentController#getAllCommentsByPostId(Integer, Integer, Integer)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = []
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /comments
+       Parameters = {}
+          Headers = [Content-Type:"application/json", Content-Length:"106"]
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = com.cognizant.commentcrud.controller.CommentController
+           Method = com.cognizant.commentcrud.controller.CommentController#createComment(Comment)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Content-Type:"application/json"]
+     Content type = application/json
+             Body = {"id":1,"postId":1,"username":"billy123","body":"This is so awesome","createdOn":"2021-03-05T00:00:00"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /comments
+       Parameters = {pageSize=[5], pageNumber=[0], postId=[1]}
+          Headers = []
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = com.cognizant.commentcrud.controller.CommentController
+           Method = com.cognizant.commentcrud.controller.CommentController#getAllCommentsByPostId(Integer, Integer, Integer)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json"]
+     Content type = application/json
+             Body = {"content":[{"id":null,"postId":1,"username":"giraffe","body":"This is a comment from a giraffe","createdOn":"2021-04-17T00:00:00"},{"id":null,"postId":1,"username":"gorilla","body":"This is a comment from a gorilla","createdOn":"2021-04-18T00:00:00"},{"id":null,"postId":1,"username":"lion","body":"This is a comment from a lion","createdOn":"2021-04-19T00:00:00"}],"pageable":{"sort":{"sorted":true,"unsorted":false,"empty":false},"offset":0,"pageNumber":0,"pageSize":5,"unpaged":false,"paged":true},"totalPages":1,"totalElements":3,"last":true,"size":5,"number":0,"sort":{"sorted":true,"unsorted":false,"empty":false},"numberOfElements":3,"first":true,"empty":false}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
