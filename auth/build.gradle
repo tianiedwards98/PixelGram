@@ -1,0 +1,98 @@
+// Alan's Check For Rebase Plugin
+buildscript {
+	if (System.getenv('SPRING_PROFILES_ACTIVE') != 'local') {
+		repositories {
+			maven {
+				url 'https://enablement-nexus.work.cognizant.studio/repository/maven-releases'
+				credentials {
+					username System.getenv('NX_USR')
+					password System.getenv('NX_PSW')
+				}
+
+			}
+		}
+		dependencies {
+			classpath 'com.cognizant.cde:gitlab-merge-gradle-plugin:1.0.0'
+		}
+	}
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.4.5'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+
+	// Sonar Qube
+	id 'jacoco'
+	id "org.sonarqube" version "3.1.1"
+}
+
+if (System.getenv('SPRING_PROFILES_ACTIVE') != 'local') {
+	apply plugin: com.cognizant.cde.GitlabMergeVerificationPlugin
+}
+
+// Extensions or Variables to use throughout the build.gradle
+ext {
+	springCloudVersion = 'Hoxton.SR10'
+}
+
+group = 'com.cognizant'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.0.3'
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-loadbalancer', version: '3.0.3'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+	runtimeOnly 'com.h2database:h2'
+}
+
+// More of Alan's Plugin to get it working.
+if (System.getenv('SPRING_PROFILES_ACTIVE') != 'local') {
+	verifyMergeRequest {
+		gitlabUrl = GITLAB_URL
+		gitlabApiToken = API_TOKEN
+		gitlabProjectId = PROJECT_ID
+		gitlabMergeId = MERGE_ID
+	}
+}
+
+// Creating a gradlew test command. We do not want to include testing any IT for this.
+test {
+	exclude '**/*IT.class'
+	useJUnitPlatform()
+}
+
+// Creating a gradlew integrationTest command. We do not want to include testing any unit tests for this.
+task integrationTest(type: Test) {
+	exclude '**/*Test.class'
+	useJUnitPlatform()
+}
+
+// Configuring SonarQube properties.
+sonarqube {
+	properties {
+		property "sonar.projectName", project.getProperty('AppName')
+		property "sonar.host.url", SONAR_URL
+		// Sonar Coverage Exclusions excludes your files from the coverage.
+		// Change it so your main application file is not included. I added the model folder as an example.
+		property "sonar.coverage.exclusions", "**/*Application*, **/models/**, **/controller/*Handler*"
+		// Sonar Exclusions makes it so your files don't exist at all to SonarQube. It's great for models as you will get a "Implement DTO or Simple POJO" error if you don't.
+		// I added model folder for example sake.
+		property "sonar.exclusions", "**/models/**, **/controller/*Handler*"
+	}
+}
+
+// Turn on jacoco xml report generation. Sonar 2.8+ uses xml jacoco reports for the quality assurance check
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
+}
