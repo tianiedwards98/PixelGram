@@ -1,0 +1,203 @@
+updateGitlabCommitStatus state: 'pending'
+
+pipeline {
+    // Makes our pipeline run on any node
+    // agent any
+    agent {
+        label 'master'
+    }
+
+    options {
+        gitLabConnection('gitlab')
+    }
+
+    environment {
+        GOOGLE_APPLICATION_CREDENTIALS = '/root/key.json'
+        KUBECONFIG = '/root/.kube/kubeconfig.yaml'
+        NX = credentials('enablement-nexus')
+    }
+    stages  {
+
+        stage('check-for-rebase-before') {
+            when {
+                expression {
+                    return env.GIT_BRANCH != 'origin/develop'
+                }
+            }
+            steps {
+                script {
+                    try {
+                        sh "./gradlew clean verifyMergeRequest -PMERGE_ID=$env.gitlabMergeRequestIid"
+                        updateGitlabCommitStatus name: 'check-for-rebase', state: 'success'
+                    } catch (exec) {
+                        // this is so we can capture the results in 'finally' below
+                        updateGitlabCommitStatus name: 'check-for-rebase', state: 'failed'
+                        throw exec
+                    }
+                }
+            }
+        }
+
+        stage('build') {
+            steps {
+                updateGitlabCommitStatus name: 'Building', state: 'running'
+                script {
+                    try {
+                        sh './gradlew clean build'
+                        updateGitlabCommitStatus name: 'Building', state: 'success'
+                    } catch (exec) {
+                        // this is so we can capture the results in 'finally' below
+                        updateGitlabCommitStatus name: 'Building', state: 'failed'
+                        throw exec
+                    }
+                }
+            }
+        }
+
+        stage('unit-test') {
+            when {
+                expression {
+                    return env.GIT_BRANCH != 'origin/develop'
+                }
+            }
+            steps {
+                script {
+                    try {
+                        sh './gradlew test'
+                        updateGitlabCommitStatus name: 'unit test', state: 'success'
+                    } catch (exec) {
+                        updateGitlabCommitStatus name: 'unit test failed', state: 'failed'
+                        throw exec
+                    }
+                }
+            }
+        }
+        stage('integration-test') {
+            when {
+                expression {
+                    return env.GIT_BRANCH != 'origin/develop'
+                }
+            }
+            steps {
+                script {
+                    try {
+                        sh './gradlew integrationTest'
+                        updateGitlabCommitStatus name: 'integration test', state: 'success'
+                    } catch (exec) {
+                        // this is so we can capture the results in 'finally' below
+                        updateGitlabCommitStatus name: 'integration test failed', state: 'failed'
+                        throw exec
+                    }
+                }
+            }
+        }
+
+        stage('sonar') {
+            when {
+                expression {
+                    return env.GIT_BRANCH != 'origin/develop'
+                }
+            }
+            steps {
+                withSonarQubeEnv('Sonar_GCP') {
+                    sh './gradlew check jacocoTestReport sonar'
+                }
+            }
+        }
+
+        stage("sonar-qa") {
+            when {
+                expression {
+                    return env.GIT_BRANCH != 'origin/develop'
+
+                }
+            }
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    // sleep is only a temporary fix to a bug
+                    sleep(10)
+                    waitForQualityGate abortPipeline: true
+                }
+                updateGitlabCommitStatus name: 'sonar', state: 'success'
+            }
+        }
+
+
+        stage('check-for-rebase-after') {
+            when {
+                expression {
+                    return env.GIT_BRANCH != 'origin/develop'
+                }
+            }
+            steps {
+                script {
+                    try {
+                        sh "./gradlew verifyMergeRequest -PMERGE_ID=$env.gitlabMergeRequestIid"
+                        updateGitlabCommitStatus name: 'check-for-rebase', state: 'success'
+                    } catch (exec) {
+                        // this is so we can capture the results in 'finally' below
+                        updateGitlabCommitStatus name: 'check-for-rebase', state: 'failed'
+                        throw exec
+                    }
+                }
+            }
+        }
+
+        stage("merge-code") {
+            when {
+                expression {
+                    return  env.GIT_BRANCH != 'origin/develop'
+                }
+            }
+            steps {
+                acceptGitLabMR()
+            }
+        }
+
+        stage("build-image") {
+            when {
+                expression {
+                    return env.GIT_BRANCH == 'origin/develop'
+                }
+            }
+            steps {
+                sh 'docker build . -t enablementprojects/cheerios-post-crud:latest'
+            }
+        }
+
+        stage("push-image") {
+            when {
+                expression {
+                    return env.GIT_BRANCH == 'origin/develop'
+                }
+            }
+            steps {
+                sh 'docker push enablementprojects/cheerios-post-crud'
+            }
+ 	    }
+
+        stage("deploy-image") {
+            when {
+                expression {
+                    return env.GIT_BRANCH == 'origin/develop'
+                }
+            }
+            steps {
+                sh 'kubectl rollout restart deployment/cheerios-post-crud  --namespace=cheerios'
+            }
+         }
+    }
+
+    post {
+        always {
+            // Cleans the workspace - so Jenkins will run fast and efficiently
+            cleanWs()
+        }
+        success {
+            updateGitlabCommitStatus state: 'success'
+        }
+        failure {
+            updateGitlabCommitStatus state: 'failed'
+        }
+    }
+}

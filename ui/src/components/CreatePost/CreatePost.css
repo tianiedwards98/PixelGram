@@ -1,0 +1,144 @@
+.createPost{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 83vh;
+}
+
+.createPost-header{
+    display:flex;
+    align-items: center;
+    padding-top:20px;
+    margin-bottom: 15px;
+    margin-top:12px;
+    padding-bottom: 24px;
+}
+
+.createPost-container{
+   width: 35vw;
+    background: #FFFFFF;
+    border: 1px solid #e6e6e6;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    padding-top:30px;
+}
+
+.createPost-header h2{
+	font-family: Billabong, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 45px;
+    line-height: 100%;
+    letter-spacing: 0.025em;
+    color: #262626;
+}
+
+.createPost-buttons{
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 35px;
+}
+
+
+.choose-image-button{
+    background: #5197E9;
+    border-radius: 3px;
+   /* padding: 10px;*/
+    width: 118px;
+     border: none;
+        padding: 10px 8px;
+    	font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 100%;
+        cursor: pointer;
+        color: #fffefe;
+        text-align: center;
+        letter-spacing: 0.025em;
+        height:40px;
+        margin-top:50px;
+       /* margin-bottom:15px;*/
+}
+
+.createPost-DescriptionBox::placeholder{
+    color: #E6E6E6;
+}
+.cancel-button,.create-post-button{
+    background: #5197E9;
+    border-radius: 3px;
+    /*padding: 10px;*/
+    width: 118px;
+    margin-top: 10px;
+        border: none;
+        padding: 8px 8px;
+    	font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 100%;
+        cursor: pointer;
+        color: #fffefe;
+        text-align: center;
+        letter-spacing: 0.025em;
+        height:40px;
+        margin-right:12px;
+}
+
+.createPost-form{
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    height: 85%;
+    justify-content: center;
+    padding-top:20px;
+}
+
+.desc-box-div{
+display:flex;
+max-width:100%;
+}
+
+.createPost-DescriptionBox{
+ display: relative;
+ flex-direction: column;
+    margin: 20px 14.7917px 18px 0px;
+    width: 361px;
+    height: 124px;
+    border: 1px solid #dbdbdb;
+        outline: none;
+        background: #FAFAFA;
+        box-sizing: border-box;
+        border-radius: 3px;
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 100%;
+        letter-spacing: 0.025em;
+
+}
+.doNotShow{
+ display:none;
+}
+
+.error-message{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0.025em;
+    color: #CB5B5B;
+    margin: 5px 0px;
+    margin-bottom: 10px;
+    padding-top:10px;
+}
+
+.file-Name{
+ padding-top:10px;
+}

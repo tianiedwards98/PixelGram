@@ -1,0 +1,92 @@
+buildscript {
+	if (System.getenv('SPRING_PROFILES_ACTIVE') != 'local') {
+		repositories {
+			maven {
+				url 'https://enablement-nexus.work.cognizant.studio/repository/maven-releases'
+				credentials {
+					username System.getenv('NX_USR')
+					password System.getenv('NX_PSW')
+				}
+
+			}
+		}
+		dependencies {
+			classpath 'com.cognizant.cde:gitlab-merge-gradle-plugin:1.0.0'
+		}
+	}
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.5.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+
+	// Sonar Qube
+	id 'jacoco'
+	id "org.sonarqube" version "3.1.1"
+}
+
+if (System.getenv('SPRING_PROFILES_ACTIVE') != 'local') {
+	apply plugin: com.cognizant.cde.GitlabMergeVerificationPlugin
+}
+
+ext {
+	springCloudVersion = '2020.0.3'
+}
+
+group = 'com.cognizant.enablement.20210510'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+    runtimeOnly 'com.h2database:h2'
+	implementation group: 'org.keycloak', name: 'keycloak-spring-boot-starter', version: '14.0.0'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.5.2'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+	testImplementation 'org.mockito:mockito-inline:3.11.2'
+}
+
+if (System.getenv('SPRING_PROFILES_ACTIVE') != 'local') {
+	verifyMergeRequest {
+		gitlabUrl = GITLAB_URL
+		gitlabApiToken = API_TOKEN
+		gitlabProjectId = PROJECT_ID
+		gitlabMergeId = MERGE_ID
+	}
+}
+
+test {
+	exclude '**/*IT.class'
+	useJUnitPlatform()
+}
+
+task integrationTest(type: Test) {
+	exclude '**/*Test.class'
+	useJUnitPlatform()
+}
+
+sonarqube {
+	properties {
+		property "sonar.projectName", project.getProperty('AppName')
+		property "sonar.host.url", SONAR_URL
+		// Sonar Coverage Exclusions excludes your files from the coverage.
+		// Change it so your main application file is not included. I added the model folder as an example.
+		property "sonar.coverage.exclusions", "**/*Application*, **/model/**, **/config/**"
+		// Sonar Exclusions makes it so your files don't exist at all to SonarQube. It's great for models as you will get a "Implement DTO or Simple POJO" error if you don't.
+		// I added model folder for example sake.
+		property "sonar.exclusions", "**/model/**, **/config/**"
+	}
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
+}

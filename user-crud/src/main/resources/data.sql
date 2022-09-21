@@ -1,0 +1,6 @@
+insert into user (id, username, profile_image_url) values (1, 'giraffe', 'https://www.gannett-cdn.com/presto/2020/11/13/PARN/f83b95a4-93af-4599-b380-a7d6d49685ca-IMG_5862_1.jpg');
+insert into user (id, username, profile_image_url) values (2, 'elephant', 'https://c402277.ssl.cf1.rackcdn.com/photos/14206/images/hero_small/WW187785.jpg?1576774644');
+insert into user (id, username, profile_image_url) values (3, 'lion', 'www.lion-image.com');
+insert into user (id, username, profile_image_url) values (4, 'tiger', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nationalgeographic.com%2Fanimals%2Fmammals%2Ffacts%2Fsumatran-tiger&psig=AOvVaw20-j0SeB3qYCl742M5kBfr&ust=1625865809550000&source=images&cd=vfe&ved=0CAcQjRxqFwoTCNCK7KK01PECFQAAAAAdAAAAABAI');
+insert into user (id, username, profile_image_url) values (5, 'bear', '');
+insert into user (id, username, profile_image_url) values (6, 'gorilla', 'https://i.guim.co.uk/img/media/391c44b26c05a527a82e9279884f2450ddfb107c/0_59_3184_1911/master/3184.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=757fc444bb264704914aee5e5bd6bfa8');

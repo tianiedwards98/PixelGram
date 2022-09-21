@@ -1,0 +1,32 @@
+# Anything that goes here is made globally for all profiles.
+spring:
+  application:
+    name: spr2-user-crud
+
+---
+# Anything that goes here is made specifically for dev's profile.
+spring:
+  profiles: dev
+
+---
+# Anything that goes here is made specifically for clouds's profile.
+# Cloud is the default profile that Google Clound Foundry makes your application use if you do not override it.
+spring:
+  profiles: cloud
+
+---
+# Anything that goes here is made specifically for local's profile.
+spring:
+  profiles: local, default
+  datasource:
+    url: jdbc:h2:file:./userDB
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+server:
+  port: 8080

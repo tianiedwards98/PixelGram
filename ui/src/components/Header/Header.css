@@ -1,0 +1,187 @@
+.navbar {
+	width: 100%;
+	
+	top: 0;
+	position: fixed;
+	
+	padding: 10px;
+	
+	color: #262626;
+	background: #fff;
+
+	box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.09);
+	
+	/* This used borders to achieve the header underline */
+	/* border-style: solid none;
+	border-width: 2px;
+	border-top: 0;
+	border-color: rgba(0, 0, 0, 0.09); */
+	
+	font-family: Billabong, Arial, Helvetica, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 25px;
+	letter-spacing: 0.025em;
+	line-height: 100%;
+}
+
+.navbar-container{
+	width: 67%;
+	color: #000;
+	margin: auto;
+	padding: auto;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.navbar-contents{
+	font-size: 25px;
+	
+	display: flex;	
+}
+
+/* Navbar top left logo, font, and iconography styles */
+.navbar-logo-icon {
+	height: 25px;
+	width: 25px;
+
+	align-self: center;
+}
+
+.navbar-post-icon{
+  height: 33px;
+  width:20px;
+  /*padding-left:130px;*/
+  cursor: pointer;
+}
+
+.navbar-logo-line {
+	height: 33px;
+	
+	padding-left: 25px;
+	padding-right: 25px;
+	
+	color: #2a2a2a;
+	
+	align-items: baseline;
+}
+
+.navbar-logo-font {
+	align-self: flex-end;
+}
+
+/* Navbar middle search bar styles */
+.navbar-search-container{
+	display: inline-flex;
+	flex-grow: 2;
+	justify-content: center;
+	align-content: center;
+
+	margin: auto;
+	padding: auto;
+}
+
+.navbar-search-contents{
+	width: 15vw;
+	
+	padding: 5px;
+    padding-left: 5px;
+	
+	background-color: #FAFAFA;
+	
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 3px;
+	border-color: #dbdbdb;
+	
+	text-align: center;
+	font-size: 12px;
+
+	font-family: Roboto, Arial, Helvetica, sans-serif, "FontAwesome";
+	/* font-family: Arial, "FontAwesome"; */
+	
+
+}
+
+
+.navbar-container-logo{
+	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: left;
+	width: 25%;
+}
+
+.navbar-container-search {
+	display: flex;
+	align-items: center;
+	align-content: center;
+	width: 50%;
+}
+
+/* Navbar top left profile icon styles */
+.navbar-profile-icon {
+	height: 25px;
+	width: 25px;
+
+	/* This is a bunch of nonsense trying to push the search box further inward away from the profile icon */
+	padding-left: 20px;
+	padding-right: 20px;
+
+	align-self: center;
+	cursor: pointer;
+}
+ .navbar-login-button{
+	width: 102px;
+   	height: 47px;
+	background: #FFFFFF;
+	border: 1px solid #E6E6E6;
+	box-sizing: border-box;
+	border-radius: 3px;
+	cursor: pointer;
+	outline: none;
+}
+
+.nabar-login-icon-container{
+    position: relative;
+    display: flex;
+	width: 25%;
+	justify-content:flex-end;
+}
+
+.login-dropdown-container{
+	position: absolute;
+    right: 0px;
+    margin-right: 12%;
+    margin-top: 29px;
+}
+
+.navbar-container-logo-link{
+	display: flex;
+	cursor: pointer;
+}
+
+.navbar-search-contents::placeholder {
+	color: #999999;
+}
+
+@media only screen and (max-width: 1080px) {
+
+	.login-dropdown-container{
+		position: absolute;
+    	right: 0px;
+    	margin-right: 10%;
+    	margin-top: 30px;
+	}
+
+}
+
+@media only screen and (max-width: 769px) {
+
+	.login-dropdown-container{
+		position: absolute;
+    	right: 0px;
+    	margin-right: -18%;
+    	margin-top: 30px;
+	}
+}

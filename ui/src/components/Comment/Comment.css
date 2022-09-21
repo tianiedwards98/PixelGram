@@ -1,0 +1,24 @@
+.post-card-comment-message-container {
+    clear: both;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.post-card-comments-container {
+    clear: both;
+    display: inline;
+} 
+
+.post-card-comment-username {
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    display: inline;
+    font-family: 'Roboto Medium', sans-serif;
+    align-self: center;
+    text-transform: lowercase;
+}
+
+.post-card-user-comment-content {
+    display: inline;
+    padding-left: 8px;
+}

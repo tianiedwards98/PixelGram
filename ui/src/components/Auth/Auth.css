@@ -1,0 +1,122 @@
+.Auth{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 83vh;
+}
+
+.Auth-container{
+    width: 35vw;
+    background: #FFFFFF;
+    border: 1px solid #e6e6e6;
+    height: 67.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+}
+
+.Auth-header{
+    display:flex;
+    align-items: center;
+    margin: 5px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+}
+
+.Auth-header h2{
+	font-family: Billabong, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 45px;
+    line-height: 100%;
+    letter-spacing: 0.025em;
+    color: #262626;
+}
+
+.Auth-logo{
+    width: 45px;
+    height: 45px;
+    margin-right: 5px; 
+}
+
+.Auth-logo-line{
+    padding: 0px 20px;
+}
+
+.Auth-form{
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    height: 55%;
+    justify-content: center;
+}
+
+.Auth-Input-Field{
+    position: relative;
+    margin: 5px 0px;
+    padding: 10px 10px;
+    border: 1px solid #dbdbdb;
+    outline: none;
+    background: #FAFAFA;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0.025em;
+    height: 57px;
+}
+
+.Auth-Input-Field::placeholder{
+    color: #E6E6E6;
+}
+
+.Auth-buttons{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Auth-Register-button , .Auth-Login-button{
+    margin-top: 10px;
+    border: none;
+    padding: 8px 8px;
+	font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 100%;
+    cursor: pointer;
+    color: #fffefe;
+    text-align: center;
+    letter-spacing: 0.025em;
+}
+
+.Auth-Login-button{
+    background: #5197E9;
+    border-radius: 3px;
+    padding: 10px;
+    width: 118px;
+}
+
+.Auth-Register-button{
+    color:#262626;
+    text-decoration: none;
+    margin-right: 14px;
+}
+
+.error-message{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0.025em;
+    color: #CB5B5B;
+    margin: 5px 0px;
+    margin-bottom: 10px;
+}
+

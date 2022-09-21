@@ -1,0 +1,160 @@
+/* Post card base styles */
+.post-card  {
+    display: flex;
+    flex-direction: column;
+    width: 42%;
+    
+    margin-top: 38px;
+    margin-left:auto;
+    margin-right:auto;
+    padding: auto;
+
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 1px;
+    border-color: rgb(224, 224, 224);
+}
+
+/* Post card header styles */
+.post-card-header {
+    z-index: -2;
+    padding: 10px 14px;
+    display: inline-flex;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #fff;
+    color: #000;
+}
+
+/* Post card header profile picture styles */
+.post-card-header-profile-picture-container {
+    z-index: -1;
+    background-image: url('../../default-pfp.png');
+    background-repeat: no-repeat;
+    -webkit-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0));
+    -moz-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0));
+    -ms-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0));
+    -o-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0));
+}
+.post-card-header-profile-picture {
+    display: flex;
+    mask-image: url('../../default-pfp.png');
+    -webkit-mask-box-image: url('../../default-pfp.png');
+}
+
+/* Post card body base styles */
+.post-card-body {
+    display: flex;
+    text-align: center;
+    background-color: #1B1B1B;
+}
+
+/* Post card footer base styles */
+.post-card-footer {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 18px;
+    word-spacing: normal;
+
+    text-align: justify;
+    letter-spacing: -0.3px;
+
+    color: #000000;
+    padding: 18px;
+    padding-bottom: 24px;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+/* Post card username - used in user message as well as header */
+.post-card-username {
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    display: inline;
+    font-family: 'Roboto Medium', sans-serif;
+    align-self: center;
+    text-transform: lowercase;
+}
+
+/* 
+Post card user message styles 
+Can also be used for comment messages - view post.js JSX for layout example
+*/
+.post-card-post-message-container {
+    display: block;
+    margin-bottom: 7px;
+}
+
+.post-card-like-and-comment-container{
+    display: block;
+    margin-bottom: 13px;
+}
+
+.post-card-user-message-content {
+    display: inline;
+    padding-left: 8px;
+}
+
+.post-card-comments-container {
+    display: inline;
+}
+
+.post-user-message-more {
+    border: 0;
+    color: #ababab;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    padding-right: 10px;
+    line-height: 18px;
+    display: inline;
+    font-family: 'Roboto Medium', sans-serif;
+    align-self: center;
+    text-transform: lowercase;
+}
+
+.post-card-comment-count{
+    border: none;
+    color: #ababab;
+    background-color: #fff;
+    font-size: 15px;
+    padding-right: 10px;
+    line-height: 18px;
+    font-family: 'Roboto Medium', sans-serif;
+    font-style: normal;
+    align-self: center;
+    font-weight: 500;
+    display: block;
+    margin-left: 0;
+    padding-left: 0;
+    margin-bottom: 5px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.post-user-message-more:hover {
+    color: #333;
+}
+
+.view-more-comments {
+    border: none;
+    color: #ababab;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    padding-right: 10px;
+    line-height: 18px;
+    font-family: 'Roboto Medium', sans-serif;
+    font-style: normal;
+    align-self: center;
+    font-weight: 500;
+    display: block;
+    margin-left: 0;
+    padding-left: 0;
+    margin-bottom: 5px;
+    outline: none;
+}
